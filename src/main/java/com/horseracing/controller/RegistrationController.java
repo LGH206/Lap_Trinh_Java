@@ -32,10 +32,10 @@ public class RegistrationController {
     // POST /registration/create : Chu ngua dang ky ngua cua minh cho tran dua
     @PostMapping("/create")
     public String handleCreate(HttpSession session,
-                               @RequestParam("raceId") int raceId,
-                               @RequestParam("horseId") int horseId,
-                               @RequestParam(value = "notes", required = false) String notes,
-                               Model model) {
+        @RequestParam("raceId") int raceId,
+        @RequestParam("horseId") int horseId,
+        @RequestParam(value = "notes", required = false) String notes,
+        Model model) {
         if (!hasRole(session, "HORSE_OWNER")) {
             return "redirect:/login";
         }
@@ -52,8 +52,8 @@ public class RegistrationController {
     // POST /registration/confirm : Chu ngua xac nhan cho phep ngua tham gia tran dua
     @PostMapping("/confirm")
     public String handleConfirm(HttpSession session,
-                                @RequestParam("id") int id,
-                                Model model) {
+        @RequestParam("id") int id,
+        Model model) {
         if (!hasRole(session, "HORSE_OWNER")) {
             return "redirect:/login";
         }
@@ -69,8 +69,8 @@ public class RegistrationController {
     // POST /registration/withdraw : Chu ngua rut dang ky dua truoc khi bat dau
     @PostMapping("/withdraw")
     public String handleWithdraw(HttpSession session,
-                                 @RequestParam("id") int id,
-                                 @RequestParam("reason") String reason) {
+        @RequestParam("id") int id,
+        @RequestParam("reason") String reason) {
         if (!hasRole(session, "HORSE_OWNER")) {
             return "redirect:/login";
         }
@@ -86,8 +86,8 @@ public class RegistrationController {
     // POST /registration/approve : Admin phe duyet don dang ky dua
     @PostMapping("/approve")
     public String handleApprove(HttpSession session,
-                                @RequestParam("id") int id,
-                                @RequestParam(value = "notes", required = false) String notes) {
+        @RequestParam("id") int id,
+        @RequestParam(value = "notes", required = false) String notes) {
         if (!hasRole(session, "ADMIN")) {
             return "error/403";
         }
@@ -98,8 +98,8 @@ public class RegistrationController {
     // POST /registration/reject : Admin tu choi don dang ky dua
     @PostMapping("/reject")
     public String handleReject(HttpSession session,
-                               @RequestParam("id") int id,
-                               @RequestParam("reason") String reason) {
+        @RequestParam("id") int id,
+        @RequestParam("reason") String reason) {
         if (!hasRole(session, "ADMIN")) {
             return "error/403";
         }
@@ -131,8 +131,7 @@ public class RegistrationController {
     // GET /registration/jockey : Xem danh sach cac tran dua ma Jockey duoc phan cong
     @GetMapping("/jockey")
     public String handleByJockey(HttpSession session,
-                                 @RequestParam(value = "jockeyId", required = false) Integer jockeyId,
-                                 Model model) {
+        @RequestParam(value = "jockeyId", required = false) Integer jockeyId, Model model) {
         if (jockeyId == null) {
             jockeyId = (Integer) session.getAttribute("jockeyId");
         }

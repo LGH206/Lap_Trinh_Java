@@ -34,8 +34,7 @@ public class JockeyController {
     // POST /jockey/register : Thuc hien dang ky jockey moi
     @PostMapping("/register")
     public String handleRegister(@ModelAttribute Jockey jockey,
-                                 @RequestParam("password") String password,
-                                 Model model) {
+        @RequestParam("password") String password, Model model) {
         try {
             int jockeyId = jockeyService.registerJockey(jockey, password);
             if (jockeyId <= 0) {
@@ -82,9 +81,7 @@ public class JockeyController {
 
     // POST /jockey/profile/update : Thuc hien cap nhat thong tin ca nhan
     @PostMapping("/profile/update")
-    public String handleUpdateProfile(HttpSession session,
-                                      @ModelAttribute Jockey jockey,
-                                      Model model) {
+    public String handleUpdateProfile(HttpSession session, @ModelAttribute Jockey jockey, Model model) {
         if (!isLoggedInAs(session, "JOCKEY")) {
             return "redirect:/login";
         }

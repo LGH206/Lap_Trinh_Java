@@ -26,10 +26,10 @@ public class InvitationController {
     // POST /invitation/send : Chu ngua gui loi moi den mot Jockey
     @PostMapping("/send")
     public String handleSend(HttpSession session,
-                             @RequestParam("registrationId") int registrationId,
-                             @RequestParam("jockeyId") int jockeyId,
-                             @RequestParam("message") String message,
-                             @RequestParam(value = "daysValid", defaultValue = "3") int daysValid) {
+        @RequestParam("registrationId") int registrationId,
+        @RequestParam("jockeyId") int jockeyId,
+        @RequestParam("message") String message,
+        @RequestParam(value = "daysValid", defaultValue = "3") int daysValid) {
         if (!hasRole(session, "HORSE_OWNER")) {
             return "redirect:/login";
         }
@@ -45,8 +45,8 @@ public class InvitationController {
     // POST /invitation/accept : Jockey dong y loi moi tu Chu Ngua
     @PostMapping("/accept")
     public String handleAccept(HttpSession session,
-                               @RequestParam("id") int id,
-                               @RequestParam(value = "responseMessage", required = false) String responseMessage) {
+        @RequestParam("id") int id,
+        @RequestParam(value = "responseMessage", required = false) String responseMessage) {
         if (!hasRole(session, "JOCKEY")) {
             return "redirect:/login";
         }
@@ -62,8 +62,8 @@ public class InvitationController {
     // POST /invitation/decline : Jockey tu choi loi moi tu Chu Ngua
     @PostMapping("/decline")
     public String handleDecline(HttpSession session,
-                                @RequestParam("id") int id,
-                                @RequestParam(value = "responseMessage", required = false) String responseMessage) {
+        @RequestParam("id") int id,
+        @RequestParam(value = "responseMessage", required = false) String responseMessage) {
         if (!hasRole(session, "JOCKEY")) {
             return "redirect:/login";
         }
@@ -79,7 +79,7 @@ public class InvitationController {
     // POST /invitation/cancel : Chu Ngua huy loi moi da gui cho Jockey
     @PostMapping("/cancel")
     public String handleCancel(HttpSession session,
-                               @RequestParam("id") int id) {
+        @RequestParam("id") int id) {
         if (!hasRole(session, "HORSE_OWNER")) {
             return "redirect:/login";
         }
