@@ -8,23 +8,17 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-// Repository quan ly toan bo thao tac co so du lieu cua Registration (Dang ky dua)
 @Repository
 public class RegistrationDAO {
 
     @Autowired
     private DataSource dataSource;
 
-    // Lay ket noi truc tiep tu DataSource duoc Spring Boot quan ly
     private Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
-
-    // Them moi don dang ky thi dau
     public int create(Registration reg) {
-        String sql = "INSERT INTO registrations (race_id, horse_id, owner_id, jockey_id, status, notes, registered_at, updated_at) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+        String sql = "INSERT INTO registrations (race_id, horse_id, owner_id, jockey_id, status, notes, registered_at, updated_at) " + "VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, reg.getRaceId());
@@ -48,8 +42,6 @@ public class RegistrationDAO {
         }
         return -1;
     }
-
-    // Tim don dang ky thi dau theo id
     public Registration findById(int id) {
         String sql = "SELECT * FROM registrations WHERE registration_id = ?";
         try (Connection conn = getConnection();
@@ -79,7 +71,6 @@ public class RegistrationDAO {
         return findByField("jockey_id", jockeyId);
     }
 
-    // Tim kiem tat ca don dang ky dua vao trang thai
     public List<Registration> findByStatus(String status) {
         String sql = "SELECT * FROM registrations WHERE status = ? ORDER BY registered_at DESC";
         List<Registration> list = new ArrayList<>();
@@ -94,7 +85,6 @@ public class RegistrationDAO {
         return list;
     }
 
-    // Kiem tra xem ngua da dang ky cho tran dua nay chua
     public boolean existsForRaceAndHorse(int raceId, int horseId) {
         String sql = "SELECT COUNT(*) FROM registrations WHERE race_id=? AND horse_id=? AND status NOT IN ('REJECTED','WITHDRAWN')";
         try (Connection conn = getConnection();
@@ -109,7 +99,6 @@ public class RegistrationDAO {
         return false;
     }
 
-    // Cap nhat trang thai cua don dang ky
     public boolean updateStatus(int registrationId, String status, String notes) {
         String sql = "UPDATE registrations SET status=?, notes=?, updated_at=NOW() WHERE registration_id=?";
         try (Connection conn = getConnection();
@@ -123,8 +112,6 @@ public class RegistrationDAO {
         }
         return false;
     }
-
-    // Chi dinh Jockey cho don dang ky dua
     public boolean assignJockey(int registrationId, int jockeyId) {
         String sql = "UPDATE registrations SET jockey_id=?, updated_at=NOW() WHERE registration_id=?";
         try (Connection conn = getConnection();
@@ -137,8 +124,6 @@ public class RegistrationDAO {
         }
         return false;
     }
-
-    // Tim kiem theo truong (field) truyen vao
     private List<Registration> findByField(String field, int value) {
         String sql = "SELECT * FROM registrations WHERE " + field + " = ? ORDER BY registered_at DESC";
         List<Registration> list = new ArrayList<>();
@@ -153,7 +138,6 @@ public class RegistrationDAO {
         return list;
     }
 
-    // Map ket qua tu DB sang Java Object
     private Registration mapRow(ResultSet rs) throws SQLException {
         Registration r = new Registration();
         r.setRegistrationId(rs.getInt("registration_id"));

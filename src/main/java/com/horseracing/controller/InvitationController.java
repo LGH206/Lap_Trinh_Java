@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/invitation")
 public class InvitationController {
-
+//invitaion
     private final IInvitationService invitationService;
 
     // Inject Service thong qua Constructor

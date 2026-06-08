@@ -3,7 +3,7 @@ package com.horseracing.dto;
 import java.time.LocalDateTime;
 
 public class RegistrationDTO {
-
+//
     private int registrationId;
     private int raceId;
     private String raceName;

@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 @Component
 public class DatabaseConfigLogger implements CommandLineRunner {
-
+//database
     @Value("${spring.datasource.url}")
     private String dbUrl;
 

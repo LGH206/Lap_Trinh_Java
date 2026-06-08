@@ -63,7 +63,7 @@ public class InvitationDTO {
     public void setJockeyName(String n){
         this.jockeyName = n;
     }
-
+//
 
     public int getHorseId(){
         return horseId;

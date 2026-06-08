@@ -10,29 +10,22 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-// Repository quan ly toan bo thao tac co so du lieu cua Jockey
 @Repository
 public class JockeyDAO {
 
     @Autowired
     private DataSource dataSource;
 
-    // Lay ket noi truc tiep tu DataSource duoc Spring Boot quan ly
     private Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
-    // Them moi mot Jockey (bao gom tao tai khoan User truoc)
     public int createJockey(Jockey jockey) {
-        String insertUser = "INSERT INTO users (username, password_hash, email, full_name, phone, role, status, created_at, updated_at) " +
-                            "VALUES (?, ?, ?, ?, ?, 'JOCKEY', 'ACTIVE', NOW(), NOW())";
-        String insertJockey = "INSERT INTO jockeys (user_id, license_number, nationality, date_of_birth, weight, " +
-                              "experience_years, total_races, total_wins, jockey_status) " +
-                              "VALUES (?, ?, ?, ?, ?, ?, 0, 0, 'AVAILABLE')";
+        String insertUser = "INSERT INTO users (username, password_hash, email, full_name, phone, role, status, created_at, updated_at) " + "VALUES (?, ?, ?, ?, ?, 'JOCKEY', 'ACTIVE', NOW(), NOW())";
+        String insertJockey = "INSERT INTO jockeys (user_id, license_number, nationality, date_of_birth, weight, " + "experience_years, total_races, total_wins, jockey_status) " + "VALUES (?, ?, ?, ?, ?, ?, 0, 0, 'AVAILABLE')";
 
         try (Connection conn = getConnection()) {
-            conn.setAutoCommit(false); // Bat dau transaction
-
+            conn.setAutoCommit(false);
             int userId;
             try (PreparedStatement psUser = conn.prepareStatement(insertUser, Statement.RETURN_GENERATED_KEYS)) {
                 psUser.setString(1, jockey.getUsername());
@@ -62,7 +55,7 @@ public class JockeyDAO {
                 jockey.setJockeyId(jockeyId);
             }
 
-            conn.commit(); // Commit neu tat ca thanh cong
+            conn.commit();  Commit neu tat ca thanh cong
             return jockeyId;
 
         } catch (SQLException e) {
@@ -70,12 +63,8 @@ public class JockeyDAO {
             throw new RuntimeException("Loi SQL khi tao tai khoan Jockey: " + e.getMessage(), e);
         }
     }
-
-    // Tim Jockey theo id
     public Jockey findById(int jockeyId) {
-        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " +
-                     "FROM jockeys j JOIN users u ON j.user_id = u.user_id " +
-                     "WHERE j.jockey_id = ?";
+        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " + "FROM jockeys j JOIN users u ON j.user_id = u.user_id " + "WHERE j.jockey_id = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, jockeyId);
@@ -86,12 +75,8 @@ public class JockeyDAO {
         }
         return null;
     }
-
-    // Tim Jockey theo user id
     public Jockey findByUserId(int userId) {
-        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " +
-                     "FROM jockeys j JOIN users u ON j.user_id = u.user_id " +
-                     "WHERE j.user_id = ?";
+        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " + "FROM jockeys j JOIN users u ON j.user_id = u.user_id " + "WHERE j.user_id = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, userId);
@@ -102,11 +87,8 @@ public class JockeyDAO {
         }
         return null;
     }
-
-    // Lay toan bo danh sach Jockey
     public List<Jockey> findAll() {
-        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " +
-                     "FROM jockeys j JOIN users u ON j.user_id = u.user_id ORDER BY j.jockey_id";
+        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " + "FROM jockeys j JOIN users u ON j.user_id = u.user_id ORDER BY j.jockey_id";
         List<Jockey> list = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -118,11 +100,8 @@ public class JockeyDAO {
         return list;
     }
 
-    // Lay danh sach Jockey dang ranh roi
     public List<Jockey> findAvailable() {
-        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " +
-                     "FROM jockeys j JOIN users u ON j.user_id = u.user_id " +
-                     "WHERE j.jockey_status = 'AVAILABLE' AND u.status = 'ACTIVE' ORDER BY j.total_wins DESC";
+        String sql = "SELECT j.*, u.username, u.email, u.full_name, u.phone, u.status AS user_status " + "FROM jockeys j JOIN users u ON j.user_id = u.user_id " + "WHERE j.jockey_status = 'AVAILABLE' AND u.status = 'ACTIVE' ORDER BY j.total_wins DESC";
         List<Jockey> list = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -133,8 +112,6 @@ public class JockeyDAO {
         }
         return list;
     }
-
-    // Kiem tra bang so lai xe (license number) da dang ky chua
     public boolean existsByLicense(String licenseNumber) {
         String sql = "SELECT COUNT(*) FROM jockeys WHERE license_number = ?";
         try (Connection conn = getConnection();
@@ -148,10 +125,8 @@ public class JockeyDAO {
         return false;
     }
 
-    // Cap nhat thong tin ca nhan cua Jockey
     public boolean updateProfile(Jockey jockey) {
-        String sql = "UPDATE jockeys SET nationality=?, date_of_birth=?, weight=?, experience_years=?, " +
-                     "profile_image_url=? WHERE jockey_id=?";
+        String sql = "UPDATE jockeys SET nationality=?, date_of_birth=?, weight=?, experience_years=?, " + "profile_image_url=? WHERE jockey_id=?";
         String sqlUser = "UPDATE users SET full_name=?, phone=?, email=?, updated_at=NOW() WHERE user_id=?";
         try (Connection conn = getConnection()) {
             conn.setAutoCommit(false);
@@ -180,8 +155,6 @@ public class JockeyDAO {
         }
         return false;
     }
-
-    // Cap nhat trang thai cua Jockey
     public boolean updateStatus(int jockeyId, String status) {
         String sql = "UPDATE jockeys SET jockey_status=? WHERE jockey_id=?";
         try (Connection conn = getConnection();
@@ -194,12 +167,8 @@ public class JockeyDAO {
         }
         return false;
     }
-
-    // Tang chi so luot dua va so tran thang sau moi tran dau
     public boolean incrementStats(int jockeyId, boolean won) {
-        String sql = "UPDATE jockeys SET total_races = total_races + 1" +
-                     (won ? ", total_wins = total_wins + 1" : "") +
-                     " WHERE jockey_id = ?";
+        String sql = "UPDATE jockeys SET total_races = total_races + 1" + (won ? ", total_wins = total_wins + 1" : "") + " WHERE jockey_id = ?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, jockeyId);
@@ -209,8 +178,6 @@ public class JockeyDAO {
         }
         return false;
     }
-
-    // Map ket qua tu DB sang Java Object
     private Jockey mapRow(ResultSet rs) throws SQLException {
         Jockey j = new Jockey();
         j.setJockeyId(rs.getInt("jockey_id"));

@@ -1,5 +1,4 @@
 package com.horseracing.repository;
-
 import com.horseracing.entity.Invitation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,24 +7,15 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-// Repository quan ly toan bo thao tac co so du lieu cua Invitation (Loi moi jockey)
 @Repository
 public class InvitationDAO {
-
     @Autowired
     private DataSource dataSource;
-
-    // Lay ket noi tu DataSource cua Spring Boot
     private Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
-
-    // Tao loi moi jockey thi dau
     public int create(Invitation inv) {
-        String sql = "INSERT INTO invitations " +
-                     "(registration_id, owner_id, jockey_id, horse_id, race_id, status, message, sent_at, expires_at) " +
-                     "VALUES (?, ?, ?, ?, ?, 'PENDING', ?, NOW(), ?)";
+        String sql = "INSERT INTO invitations " + "(registration_id, owner_id, jockey_id, horse_id, race_id, status, message, sent_at, expires_at) " + "VALUES (?, ?, ?, ?, ?, 'PENDING', ?, NOW(), ?)";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, inv.getRegistrationId());
@@ -34,8 +24,7 @@ public class InvitationDAO {
             ps.setInt(4, inv.getHorseId());
             ps.setInt(5, inv.getRaceId());
             ps.setString(6, inv.getMessage());
-            ps.setTimestamp(7, inv.getExpiresAt() != null
-                    ? Timestamp.valueOf(inv.getExpiresAt()) : null);
+            ps.setTimestamp(7, inv.getExpiresAt() != null ? Timestamp.valueOf(inv.getExpiresAt()) : null);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -48,8 +37,6 @@ public class InvitationDAO {
         }
         return -1;
     }
-
-    // Tim kiem loi moi dua vao id
     public Invitation findById(int id) {
         String sql = "SELECT * FROM invitations WHERE invitation_id = ?";
         try (Connection conn = getConnection();
@@ -75,10 +62,8 @@ public class InvitationDAO {
         return findByField("race_id", raceId);
     }
 
-    // Tim cac loi moi dang cho jockey xac nhan (va chua het han)
     public List<Invitation> findPendingByJockeyId(int jockeyId) {
-        String sql = "SELECT * FROM invitations WHERE jockey_id=? AND status='PENDING' " +
-                     "AND (expires_at IS NULL OR expires_at > NOW()) ORDER BY sent_at DESC";
+        String sql = "SELECT * FROM invitations WHERE jockey_id=? AND status='PENDING' " + "AND (expires_at IS NULL OR expires_at > NOW()) ORDER BY sent_at DESC";
         List<Invitation> list = new ArrayList<>();
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -90,8 +75,6 @@ public class InvitationDAO {
         }
         return list;
     }
-
-    // Kiem tra xem jockey da co loi moi nao dang cho xac nhan tai race nay chua
     public boolean hasPendingInvitation(int jockeyId, int raceId) {
         String sql = "SELECT COUNT(*) FROM invitations WHERE jockey_id=? AND race_id=? AND status='PENDING'";
         try (Connection conn = getConnection();
@@ -106,10 +89,8 @@ public class InvitationDAO {
         return false;
     }
 
-    // Jockey phan hoi dong y hoac tu choi loi moi
     public boolean respond(int invitationId, String status, String responseMessage) {
-        String sql = "UPDATE invitations SET status=?, response_message=?, responded_at=NOW() " +
-                     "WHERE invitation_id=?";
+        String sql = "UPDATE invitations SET status=?, response_message=?, responded_at=NOW() " + "WHERE invitation_id=?";
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, status);
@@ -122,7 +103,6 @@ public class InvitationDAO {
         return false;
     }
 
-    // Huy toan bo loi moi dang cho cua mot don dang ky cu the
     public boolean cancelByRegistration(int registrationId) {
         String sql = "UPDATE invitations SET status='CANCELLED' WHERE registration_id=? AND status='PENDING'";
         try (Connection conn = getConnection();
@@ -135,7 +115,6 @@ public class InvitationDAO {
         return false;
     }
 
-    // Tim kiem theo truong (field) truyen vao
     private List<Invitation> findByField(String field, int value) {
         String sql = "SELECT * FROM invitations WHERE " + field + " = ? ORDER BY sent_at DESC";
         List<Invitation> list = new ArrayList<>();
@@ -150,7 +129,6 @@ public class InvitationDAO {
         return list;
     }
 
-    // Map ket qua tu DB sang Java Object
     private Invitation mapRow(ResultSet rs) throws SQLException {
         Invitation inv = new Invitation();
         inv.setInvitationId(rs.getInt("invitation_id"));
