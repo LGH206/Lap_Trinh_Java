@@ -104,7 +104,7 @@ src/main/resources
 ## Mô hình nghiệp vụ (Domain Model)
 
 ```text
-User
+User // lớp cha
 ├── Admin
 ├── HorseOwner
 ├── Jockey

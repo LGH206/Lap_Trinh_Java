@@ -1,5 +1,12 @@
 package com.fe.horseracing.entity;
 
-public class spectator {
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "spectator")
+public class spectator extends user {
+
+	public spectator() {
+		super();
+	}
 }

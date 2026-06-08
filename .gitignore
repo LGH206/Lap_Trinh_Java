@@ -1,0 +1,16 @@
+# Maven
+target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Compiled files
+*.class
+
+.idea/
+*.iml
+
+.DS_Store
+Thumbs.db
