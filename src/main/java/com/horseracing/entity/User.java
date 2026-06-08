@@ -1,66 +1,65 @@
 package com.horseracing.entity;
-import com.horseracing.interfaces.IUserAuthentication;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+//abc
+// Lop cha truu tuong dai dien cho tat ca nguoi dung trong he thong.
+// Duoc ke thua boi cac lop nhu Jockey, Admin, va cac doi tuong nguoi dung khac.
+public abstract class User {
 
-public abstract class User implements IUserAuthentication {
-    protected Long id;
-    protected String fullName;
-    protected String email;
-    protected String password;
-    protected Date createdDate;
+    private int userId;
+    private String username;
+    private String passwordHash;
+    private String email;
+    private String fullName;
+    private String phone;
+    private String role;         // HORSE_OWNER, JOCKEY, REFEREE, SPECTATOR, ADMIN
+    private String status;       // ACTIVE, INACTIVE, BANNED
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
-    public User() {
-    }
+    public User() {}
 
-    public User(Long id, String fullName, String email, String password, Date createdDate) {
-        this.id = id;
-        this.fullName = fullName;
+    public User(String username, String passwordHash, String email,
+                String fullName, String phone, String role) {
+        this.username = username;
+        this.passwordHash = passwordHash;
         this.email = email;
-        this.password = password;
-        this.createdDate = createdDate;
-    }
-
-    //Getter
-    public Long getId() {
-        return id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    //Setter
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setFullName(String fullName) {
         this.fullName = fullName;
+        this.phone = phone;
+        this.role = role;
+        this.status = "ACTIVE";
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    // Getters & Setters
+    public int getUserId()                      { return userId; }
+    public void setUserId(int userId)           { this.userId = userId; }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public String getUsername()                 { return username; }
+    public void setUsername(String username)    { this.username = username; }
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+    public String getPasswordHash()             { return passwordHash; }
+    public void setPasswordHash(String ph)      { this.passwordHash = ph; }
+
+    public String getEmail()                    { return email; }
+    public void setEmail(String email)          { this.email = email; }
+
+    public String getFullName()                 { return fullName; }
+    public void setFullName(String fullName)    { this.fullName = fullName; }
+
+    public String getPhone()                    { return phone; }
+    public void setPhone(String phone)          { this.phone = phone; }
+
+    public String getRole()                     { return role; }
+    public void setRole(String role)            { this.role = role; }
+
+    public String getStatus()                   { return status; }
+    public void setStatus(String status)        { this.status = status; }
+
+    public LocalDateTime getCreatedAt()         { return createdAt; }
+    public void setCreatedAt(LocalDateTime t)   { this.createdAt = t; }
+
+    public LocalDateTime getUpdatedAt()         { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime t)   { this.updatedAt = t; }
 }
