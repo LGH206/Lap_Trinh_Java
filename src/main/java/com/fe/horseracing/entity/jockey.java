@@ -1,5 +1,12 @@
 package com.fe.horseracing.entity;
 
-public class jockey {
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "jockeys")
+public class jockey extends user {
+
+	public jockey() {
+		super();
+	}
 }
