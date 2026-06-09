@@ -9,8 +9,12 @@ target/
 # Compiled files
 *.class
 
+# VS Code
+.vscode/
+
 .idea/
 *.iml
 
+#OS
 .DS_Store
 Thumbs.db
