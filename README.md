@@ -144,7 +144,7 @@ Persistence   : JPA
 
 ### Phase 2 – Thiết kế Entity
 
-* [ ] User
+* [x] User
 * [ ] Admin
 * [ ] HorseOwner
 * [ ] Jockey
