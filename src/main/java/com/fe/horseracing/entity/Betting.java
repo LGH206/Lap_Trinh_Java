@@ -1,6 +1,9 @@
 package com.fe.horseracing.entity;
 
 import java.time.LocalDateTime;
+
+import com.fe.horseracing.enums.BettingStatus;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -26,7 +29,8 @@ public class Betting {
      * LOST
      * CANCELLED
      */
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private BettingStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -80,11 +84,11 @@ public class Betting {
         this.betTime = betTime;
     }
 
-    public String getStatus() {
+    public BettingStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(BettingStatus status) {
         this.status = status;
     }
 
@@ -116,13 +120,13 @@ public class Betting {
     }
 
 	public Betting(Long bettingId, Double betAmount, Double odds, Double payoutAmount, LocalDateTime betTime,
-			String status, User bettor, Race race, Horse selectedHorse) {
+			BettingStatus status, User bettor, Race race, Horse selectedHorse) {
 		this.bettingId = bettingId;
 		this.betAmount = betAmount;
 		this.odds = odds;
 		this.payoutAmount = payoutAmount;
 		this.betTime = betTime;
-		this.status = status;
+		this.status = status; 
 		this.bettor = bettor;
 		this.race = race;
 		this.selectedHorse = selectedHorse;
