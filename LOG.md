@@ -44,3 +44,17 @@ Không triển khai:
 
 -- tạo pack enums -- mục đích xây dựng các class status
 ```
+
+##UPDATE 14/6 -- GIA HUY
+```text
+thiết lập 1 số quan hệ liên quan tới race và result
+
+Tournament 1\N Race
+Race 1\N Registration
+Horse 1\N Registration
+Jockey 1\N Registration
+Race 1\N RaceResult
+Horse 1\N RaceResult
+RaceReferee 1\N Race 
+
+```

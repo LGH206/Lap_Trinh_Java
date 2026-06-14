@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity 
 @Table(name = "tournaments")
-public class tournament {
+public class Tournament {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long tournamentId;
@@ -21,7 +21,7 @@ public class tournament {
 	
 	private String status;
     
-	public tournament() {
+	public Tournament() {
 		super();
 	}
 	

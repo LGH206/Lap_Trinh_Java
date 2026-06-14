@@ -1,5 +1,5 @@
 package com.fe.horseracing.entity;
 
-public class result {
+public class Betting {
 
 }

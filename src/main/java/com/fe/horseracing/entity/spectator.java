@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "spectator")
-public class spectator extends user {
+public class Spectator extends User {
 
-	public spectator() {
+	public Spectator() {
 		super();
 	}
 }

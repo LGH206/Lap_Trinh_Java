@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 // Kế thừa trong JPA - USER đặt là lớp cha --- Admin/ Jockey/.. là lớp con
 // tạo users - admins - jockys --- các bảng con lk với user
 
-public abstract class user {
+public abstract class User {
 	@Id // tự động tăng ID
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
@@ -31,7 +31,7 @@ public abstract class user {
 	
 	private String phoneNumber;
 
-	public user() {
+	public User() {
 	}
 
 	//getter - setter
