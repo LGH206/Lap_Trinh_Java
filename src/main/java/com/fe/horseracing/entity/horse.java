@@ -1,5 +1,6 @@
 package com.fe.horseracing.entity;
 
+import java.util.List;
 import jakarta.persistence.*;
 
 @Entity
@@ -36,9 +37,22 @@ public class Horse {
 	@JoinColumn(name = "owner_id") //Foregin key
 	private HorseOwner owner;
 	
+	@OneToMany(mappedBy = "selectedHorse")
+	private List<Betting> bettings;
+	
+	@OneToMany(mappedBy = "horse")
+	private List<RaceResult> raceResults;
 	
 	public Horse() {
 		super();
+	}
+
+	public List<Betting> getBettings() {
+		return bettings;
+	}
+
+	public void setBettings(List<Betting> bettings) {
+		this.bettings = bettings;
 	}
 
 	public String getColor() {
@@ -111,6 +125,14 @@ public class Horse {
 	
 	public void setOwner(HorseOwner owner) {
 	    this.owner = owner;
+	}
+
+	public List<RaceResult> getRaceResults() {
+		return raceResults;
+	}
+
+	public void setRaceResults(List<RaceResult> raceResults) {
+		this.raceResults = raceResults;
 	}
 	
 	

@@ -34,8 +34,35 @@ public class Race {
     @OneToMany(mappedBy = "race")
     private List<Invitation> invitations;
     
+    @OneToMany(mappedBy = "race")
+    private List<Betting> bettings;
+    
 	public Race() {
 		super();
+	}
+
+	public RaceReferee getReferee() {
+		return referee;
+	}
+
+	public void setReferee(RaceReferee referee) {
+		this.referee = referee;
+	}
+
+	public List<Invitation> getInvitations() {
+		return invitations;
+	}
+
+	public void setInvitations(List<Invitation> invitations) {
+		this.invitations = invitations;
+	}
+
+	public List<Betting> getBettings() {
+		return bettings;
+	}
+
+	public void setBettings(List<Betting> bettings) {
+		this.bettings = bettings;
 	}
 
 	public Long getRaceId() {
