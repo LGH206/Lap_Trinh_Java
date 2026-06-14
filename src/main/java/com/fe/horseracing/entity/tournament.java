@@ -1,6 +1,8 @@
 package com.fe.horseracing.entity;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity 
@@ -20,6 +22,17 @@ public class Tournament {
 	private Double prizePool;
 	
 	private String status;
+	
+	public List<Race> getRaces() {
+		return races;
+	}
+
+	public void setRaces(List<Race> races) {
+		this.races = races;
+	}
+
+	@OneToMany(mappedBy = "tournament")
+	private List<Race> races;
     
 	public Tournament() {
 		super();

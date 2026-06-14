@@ -1,5 +1,7 @@
 package com.fe.horseracing.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -30,6 +32,9 @@ public abstract class User {
 	private String password;
 	
 	private String phoneNumber;
+	
+	@OneToMany(mappedBy = "bettor")
+	private List<Betting> bettings;
 
 	public User() {
 	}
@@ -37,6 +42,14 @@ public abstract class User {
 	//getter - setter
 	public Long getUserId() {
 		return userId;
+	}
+
+	public List<Betting> getBettings() {
+		return bettings;
+	}
+
+	public void setBettings(List<Betting> bettings) {
+		this.bettings = bettings;
 	}
 
 	public void setUserId(Long userId) {
