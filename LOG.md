@@ -57,4 +57,6 @@ Race 1\N RaceResult
 Horse 1\N RaceResult
 RaceReferee 1\N Race 
 
+-- tao enums RaceReferee/ Invitation/ RaceResult/ Betting 
+- refactored stat = enums
 ```
