@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "registrations")
-public class registration {
+public class Registration {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long registrationId;
@@ -15,15 +15,15 @@ public class registration {
 	private String status;
 	
     @ManyToOne
-    private horse horse;
+    private Horse horse;
 
     @ManyToOne
-    private jockey jockey;
+    private Jockey jockey;
 
     @ManyToOne
-    private race race;
+    private Race race;
 
-	public registration() {
+	public Registration() {
 		super();
 	}
 
@@ -51,27 +51,27 @@ public class registration {
 		this.status = status;
 	}
 
-	public horse getHorse() {
+	public Horse getHorse() {
 		return horse;
 	}
 
-	public void setHorse(horse horse) {
+	public void setHorse(Horse horse) {
 		this.horse = horse;
 	}
 
-	public jockey getJockey() {
+	public Jockey getJockey() {
 		return jockey;
 	}
 
-	public void setJockey(jockey jockey) {
+	public void setJockey(Jockey jockey) {
 		this.jockey = jockey;
 	}
 
-	public race getRace() {
+	public Race getRace() {
 		return race;
 	}
 
-	public void setRace(race race) {
+	public void setRace(Race race) {
 		this.race = race;
 	}
 }

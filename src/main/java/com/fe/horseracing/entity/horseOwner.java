@@ -5,20 +5,20 @@ import java.util.*;
 
 @Entity
 @Table(name = "horse_Owners")
-public class horseOwner {
+public class HorseOwner extends User {
 	
 	@OneToMany(mappedBy = "owner")
-	private List<horse> horses;
+	private List<Horse> horses;
 	
-	public horseOwner() {
+	public HorseOwner() {
 		super();
 	}
 	
-	public List<horse> getHorses() {
+	public List<Horse> getHorses() {
 	    return horses;
 	}
 
-	public void setHorses(List<horse> horses) {
+	public void setHorses(List<Horse> horses) {
 	    this.horses = horses;
 	}
 }

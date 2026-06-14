@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "horses")
-public class horse {
+public class Horse {
 
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +34,10 @@ public class horse {
 
 	@ManyToOne
 	@JoinColumn(name = "owner_id") //Foregin key
-	private horseOwner owner;
+	private HorseOwner owner;
 	
 	
-	public horse() {
+	public Horse() {
 		super();
 	}
 
@@ -105,11 +105,11 @@ public class horse {
 		this.status = status;
 	}
 	
-	public horseOwner getOwner() {
+	public HorseOwner getOwner() {
 	    return owner;
 	}
 	
-	public void setOwner(horseOwner owner) {
+	public void setOwner(HorseOwner owner) {
 	    this.owner = owner;
 	}
 	

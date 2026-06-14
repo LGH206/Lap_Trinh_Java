@@ -2,10 +2,11 @@ package com.fe.horseracing.entity;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "races")
-public class race {
+public class Race {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long raceId;
@@ -21,9 +22,19 @@ public class race {
 
     @ManyToOne
     @JoinColumn(name = "tournament_id")
-    private tournament tournament;
+    private Tournament tournament;
     
-	public race() {
+    @ManyToOne
+    @JoinColumn(name = "referee_id")
+    private RaceReferee referee;
+    
+    @OneToMany(mappedBy = "race")
+    private List<RaceResult> raceResults;
+    
+    @OneToMany(mappedBy = "race")
+    private List<Invitation> invitations;
+    
+	public Race() {
 		super();
 	}
 
@@ -67,12 +78,20 @@ public class race {
 		this.status = status;
 	}
 
-	public tournament getTournament() {
+	public Tournament getTournament() {
 		return tournament;
 	}
 
-	public void setTournament(tournament tournament) {
+	public void setTournament(Tournament tournament) {
 		this.tournament = tournament;
+	}
+
+	public List<RaceResult> getRaceResults() {
+		return raceResults;
+	}
+
+	public void setRaceResults(List<RaceResult> raceResults) {
+		this.raceResults = raceResults;
 	}
     
 }
