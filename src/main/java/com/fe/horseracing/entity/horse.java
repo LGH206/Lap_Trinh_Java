@@ -7,45 +7,70 @@ import jakarta.persistence.*;
 @Table(name = "horses")
 public class Horse {
 
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long horseId;
-	
+
 	@Column(nullable = false)
 	private String horseName;
-	
+
 	@Column(nullable = false)
 	private String breed;
-	
+
 	private Integer age;
-	
+
 	private String gender;
-	
+
 	private Double weight;
-	
+
 	private String color;
-	
+
 	private String status;
 	/*
-     * Trạng thái:
-     * ACTIVE
-     * INJURED
-     * RETIRED
-     */
+	 * Trạng thái:
+	 * ACTIVE
+	 * INJURED
+	 * RETIRED
+	 */
+
+	// ========== THÊM 2 TRƯỜNG MỚI ==========
+	@Column(nullable = false)
+	private Boolean verified = false;  // Thêm dòng này
+
+	private String medicalCertificate;  // Thêm dòng này
+	// ======================================
 
 	@ManyToOne
-	@JoinColumn(name = "owner_id") //Foregin key
+	@JoinColumn(name = "owner_id")
 	private HorseOwner owner;
-	
+
 	@OneToMany(mappedBy = "selectedHorse")
 	private List<Betting> bettings;
-	
+
 	@OneToMany(mappedBy = "horse")
 	private List<RaceResult> raceResults;
-	
+
 	public Horse() {
 		super();
 	}
+
+	// ========== GETTERS AND SETTERS MỚI ==========
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
+	}
+
+	public String getMedicalCertificate() {
+		return medicalCertificate;
+	}
+
+	public void setMedicalCertificate(String medicalCertificate) {
+		this.medicalCertificate = medicalCertificate;
+	}
+	// =============================================
 
 	public List<Betting> getBettings() {
 		return bettings;
@@ -118,13 +143,13 @@ public class Horse {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public HorseOwner getOwner() {
-	    return owner;
+		return owner;
 	}
-	
+
 	public void setOwner(HorseOwner owner) {
-	    this.owner = owner;
+		this.owner = owner;
 	}
 
 	public List<RaceResult> getRaceResults() {
@@ -134,6 +159,4 @@ public class Horse {
 	public void setRaceResults(List<RaceResult> raceResults) {
 		this.raceResults = raceResults;
 	}
-	
-	
 }
