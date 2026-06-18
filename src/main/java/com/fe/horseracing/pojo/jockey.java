@@ -1,4 +1,4 @@
-package com.fe.horseracing.entity;
+package com.fe.horseracing.pojo;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;

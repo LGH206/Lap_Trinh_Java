@@ -1,4 +1,4 @@
-package com.fe.horseracing.entity;
+package com.fe.horseracing.pojo;
 
 import java.time.LocalDate;
 import java.util.List;
