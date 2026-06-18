@@ -1,4 +1,4 @@
-package com.fe.horseracing.entity;
+package com.fe.horseracing.pojo;
 
 import java.util.List;
 import com.fe.horseracing.enums.RefereeStatus;
