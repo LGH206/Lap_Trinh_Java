@@ -43,7 +43,7 @@ public class Jockey extends User {
     }
 
     public Jockey(String userName, String password, String email, String firstName, String lastName, String phoneNumber, String licenseNumber, String nationality, LocalDate dateOfBirth, double weight, int experienceYears) {
-        super(userName, password, email, firstName, lastName, phoneNumber);
+        super();
         this.licenseNumber = licenseNumber;
         this.nationality = nationality;
         this.dateOfBirth = dateOfBirth;
