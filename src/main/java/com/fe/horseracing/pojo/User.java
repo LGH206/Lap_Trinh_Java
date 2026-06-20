@@ -33,10 +33,22 @@ public abstract class User {
 	
 	private String phoneNumber;
 	
-	@OneToMany(mappedBy = "bettor")
-	private List<Betting> bettings;
-
+	@OneToMany(mappedBy = "spectator")
+	private List<Prediction> predictions;
+	
 	public User() {
+	}
+
+	public User(Long userId, String firstName, String lastName, String email, String userName, String password,
+			String phoneNumber, List<Prediction> predictions) {
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.userName = userName;
+		this.password = password;
+		this.phoneNumber = phoneNumber;
+		this.predictions = predictions;
 	}
 
 	//getter - setter
@@ -44,12 +56,12 @@ public abstract class User {
 		return userId;
 	}
 
-	public List<Betting> getBettings() {
-		return bettings;
+	public List<Prediction> getBettings() {
+		return predictions;
 	}
 
-	public void setBettings(List<Betting> bettings) {
-		this.bettings = bettings;
+	public void setBettings(List<Prediction> bettings) {
+		this.predictions = bettings;
 	}
 
 	public void setUserId(Long userId) {
