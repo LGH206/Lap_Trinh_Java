@@ -1,6 +1,6 @@
 package com.fe.horseracing.enums;
 
-public enum BettingStatus {
+public enum PredictionStatus {
     PENDING,
     WON,
     LOST,

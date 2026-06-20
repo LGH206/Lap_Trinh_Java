@@ -35,7 +35,7 @@ public class Race {
     private List<Invitation> invitations;
     
     @OneToMany(mappedBy = "race")
-    private List<Betting> bettings;
+    private List<Prediction> predictions;
     
 	public Race() {
 		super();
@@ -57,12 +57,12 @@ public class Race {
 		this.invitations = invitations;
 	}
 
-	public List<Betting> getBettings() {
-		return bettings;
+	public List<Prediction> getBettings() {
+		return predictions;
 	}
 
-	public void setBettings(List<Betting> bettings) {
-		this.bettings = bettings;
+	public void setBettings(List<Prediction> bettings) {
+		this.predictions = bettings;
 	}
 
 	public Long getRaceId() {

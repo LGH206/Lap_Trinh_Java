@@ -35,8 +35,8 @@ public class Horse {
 	@JoinColumn(name = "owner_id")
 	private HorseOwner owner;
 
-	@OneToMany(mappedBy = "selectedHorse")
-	private List<Betting> bettings;
+	@OneToMany(mappedBy = "predictedHorse")
+	private List<Prediction> predictions;
 
 	@OneToMany(mappedBy = "horse")
 	private List<RaceResult> raceResults;
@@ -60,12 +60,12 @@ public class Horse {
 		this.medicalCertificate = medicalCertificate;
 	}
 
-	public List<Betting> getBettings() {
-		return bettings;
+	public List<Prediction> getBettings() {
+		return predictions;
 	}
 
-	public void setBettings(List<Betting> bettings) {
-		this.bettings = bettings;
+	public void setBettings(List<Prediction> bettings) {
+		this.predictions = bettings;
 	}
 
 	public String getColor() {

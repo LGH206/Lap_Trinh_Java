@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "jockeys")
-@PrimaryKeyJoinColumn(name = "user_id")
+@PrimaryKeyJoinColumn(name = "user_Id")
 public class Jockey extends User {
 
     @Column(name = "license_number", nullable = false, unique = true, length = 50)
