@@ -1,9 +1,7 @@
 package com.fe.horseracing.pojo;
 
 import java.time.LocalDateTime;
-
 import com.fe.horseracing.enums.InvitationStatus;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -19,13 +17,7 @@ public class Invitation {
     private LocalDateTime responseDate;
 
     @Enumerated(EnumType.STRING)
-    private InvitationStatus status; // enums 
-    /*
-     * PENDING
-     * ACCEPTED
-     * REJECTED
-     * EXPIRED
-     */
+    private InvitationStatus status;
 
     private String message;
 
@@ -35,7 +27,32 @@ public class Invitation {
 
     @ManyToOne
     @JoinColumn(name = "referee_id")
-    private RaceReferee referee;
+    private User referee;
+
+    @ManyToOne
+    @JoinColumn(name = "jockey_id")
+    private Jockey jockey;
+
+    @ManyToOne
+    @JoinColumn(name = "registration_id")
+    private Registration registration;
+
+    private String responseMessage;
+
+    private LocalDateTime expiresAt;
+
+    public LocalDateTime getExpiresAt() {
+        return expiresAt;
+    }
+
+    public void setExpiresAt(LocalDateTime expiresAt) {
+        this.expiresAt = expiresAt;
+    }
+
+    @Transient
+    public boolean isExpired() {
+        return expiresAt != null && LocalDateTime.now().isAfter(expiresAt);
+    }
 
 	public Long getInvitationId() {
 		return invitationId;
@@ -85,19 +102,43 @@ public class Invitation {
 		this.race = race;
 	}
 
-	public RaceReferee getReferee() {
+	public User getReferee() {
 		return referee;
 	}
 
-	public void setReferee(RaceReferee referee) {
+	public void setReferee(User referee) {
 		this.referee = referee;
+	}
+
+	public Jockey getJockey() {
+		return jockey;
+	}
+
+	public void setJockey(Jockey jockey) {
+		this.jockey = jockey;
+	}
+
+	public Registration getRegistration() {
+		return registration;
+	}
+
+	public void setRegistration(Registration registration) {
+		this.registration = registration;
+	}
+
+	public String getResponseMessage() {
+		return responseMessage;
+	}
+
+	public void setResponseMessage(String responseMessage) {
+		this.responseMessage = responseMessage;
 	}
 	
 	public Invitation() {
 	}
 
 	public Invitation(Long invitationId, LocalDateTime sentDate, LocalDateTime responseDate, InvitationStatus status,
-			String message, Race race, RaceReferee referee) {
+			String message, Race race, User referee) {
 		super();
 		this.invitationId = invitationId;
 		this.sentDate = sentDate;
@@ -112,8 +153,4 @@ public class Invitation {
 	public String toString() {
 		return "Invitation [invitationId=" + invitationId + ", status=" + status + "]";
 	}
-
-	
-	
-
 }

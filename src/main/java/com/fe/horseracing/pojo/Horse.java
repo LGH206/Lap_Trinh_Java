@@ -26,19 +26,10 @@ public class Horse {
 	private String color;
 
 	private String status;
-	/*
-	 * Trạng thái:
-	 * ACTIVE
-	 * INJURED
-	 * RETIRED
-	 */
-
-	// ========== THÊM 2 TRƯỜNG MỚI ==========
 	@Column(nullable = false)
-	private Boolean verified = false;  // Thêm dòng này
+	private Boolean verified = false; 
 
-	private String medicalCertificate;  // Thêm dòng này
-	// ======================================
+	private String medicalCertificate;  
 
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
@@ -53,8 +44,6 @@ public class Horse {
 	public Horse() {
 		super();
 	}
-
-	// ========== GETTERS AND SETTERS MỚI ==========
 	public Boolean getVerified() {
 		return verified;
 	}
@@ -70,7 +59,6 @@ public class Horse {
 	public void setMedicalCertificate(String medicalCertificate) {
 		this.medicalCertificate = medicalCertificate;
 	}
-	// =============================================
 
 	public List<Betting> getBettings() {
 		return bettings;

@@ -22,13 +22,6 @@ public class Betting {
     private Double payoutAmount;
 
     private LocalDateTime betTime;
-
-    /*
-     * PENDING
-     * WON
-     * LOST
-     * CANCELLED
-     */
     @Enumerated(EnumType.STRING)
     private BettingStatus status;
 
