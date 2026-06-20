@@ -2,7 +2,6 @@ package com.fe.horseracing.pojo;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
