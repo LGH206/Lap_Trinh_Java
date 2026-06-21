@@ -37,6 +37,9 @@ public class Horse {
 
 	@OneToMany(mappedBy = "predictedHorse")
 	private List<Prediction> predictions;
+	
+	@OneToMany(mappedBy = "horse")
+	private List<Violation> violations;
 
 	@OneToMany(mappedBy = "horse")
 	private List<RaceResult> raceResults;
@@ -146,5 +149,17 @@ public class Horse {
 
 	public void setRaceResults(List<RaceResult> raceResults) {
 		this.raceResults = raceResults;
+	}
+	public List<Prediction> getPredictions() {
+		return predictions;
+	}
+	public void setPredictions(List<Prediction> predictions) {
+		this.predictions = predictions;
+	}
+	public List<Violation> getViolations() {
+		return violations;
+	}
+	public void setViolations(List<Violation> violations) {
+		this.violations = violations;
 	}
 }

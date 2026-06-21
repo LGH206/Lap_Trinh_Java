@@ -32,6 +32,9 @@ public class RaceReferee extends User {
 	@OneToMany(mappedBy = "referee")
 	private List<RaceResult> raceResults;
 	
+	@OneToMany(mappedBy = "referee")
+	private List<Violation> violations;
+	
 	
 	public List<Invitation> getInvitations() {
 		return invitations;
@@ -88,6 +91,14 @@ public class RaceReferee extends User {
 		this.licenseNumber = licenseNumber;
 		this.experienceYears = experienceYears;
 		this.status = status;
+	}
+
+	public List<Violation> getViolations() {
+		return violations;
+	}
+
+	public void setViolations(List<Violation> violations) {
+		this.violations = violations;
 	}
 
 	@Override

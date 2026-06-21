@@ -5,8 +5,8 @@ import com.fe.horseracing.pojo.Jockey;
 import com.fe.horseracing.pojo.Registration;
 import com.fe.horseracing.pojo.Race;
 import com.fe.horseracing.pojo.Horse;
-import com.fe.horseracing.repository.JockeyRepository;
-import com.fe.horseracing.repository.RegistrationRepository;
+import com.fe.horseracing.repository.interfaces.JockeyRepository;
+import com.fe.horseracing.repository.interfaces.RegistrationRepository;
 import com.fe.horseracing.repository.RaceRepository;
 import com.fe.horseracing.repository.HorseRepository;
 import com.fe.horseracing.service.interfaces.IParticipationService;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 @Transactional
 public class ParticipationServiceImpl implements IParticipationService {
 

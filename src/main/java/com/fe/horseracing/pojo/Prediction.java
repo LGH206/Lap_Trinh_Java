@@ -14,21 +14,23 @@ public class Prediction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long predictionId;
 
+    @Column(nullable = false)
     private LocalDateTime predictionTime;
     
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private PredictionStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User spectator;
 
     @ManyToOne
-    @JoinColumn(name = "race_id")
+    @JoinColumn(name = "race_id", nullable = false)
     private Race race;
     
     @ManyToOne
-    @JoinColumn(name = "horse_id")
+    @JoinColumn(name = "horse_id", nullable = false)
     private Horse predictedHorse;
 
 	public Long getPredictionId() {
@@ -90,13 +92,6 @@ public class Prediction {
 		this.spectator = spectator;
 		this.race = race;
 		this.predictedHorse = predictedHorse;
-	}
-
-	public Prediction(Long predictionId, LocalDateTime predictionTime, PredictionStatus status) {
-		super();
-		this.predictionId = predictionId;
-		this.predictionTime = predictionTime;
-		this.status = status;
 	}
 
 	@Override

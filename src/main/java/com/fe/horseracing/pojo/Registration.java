@@ -24,17 +24,6 @@ public class Registration {
     @ManyToOne
     private Race race;
 
-    @OneToMany(mappedBy = "race")
-    private List<Registration> registrations;
-    
-	public List<Registration> getRegistrations() {
-		return registrations;
-	}
-
-	public void setRegistrations(List<Registration> registrations) {
-		this.registrations = registrations;
-	}
-
 	public Registration() {
 		super();
 	}

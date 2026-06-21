@@ -36,6 +36,9 @@ public abstract class User {
 	@OneToMany(mappedBy = "spectator")
 	private List<Prediction> predictions;
 	
+	@OneToMany(mappedBy = "user")
+	private List<Notification> notifications;
+	
 	public User() {
 	}
 
@@ -51,17 +54,8 @@ public abstract class User {
 		this.predictions = predictions;
 	}
 
-	//getter - setter
 	public Long getUserId() {
 		return userId;
-	}
-
-	public List<Prediction> getBettings() {
-		return predictions;
-	}
-
-	public void setBettings(List<Prediction> bettings) {
-		this.predictions = bettings;
 	}
 
 	public void setUserId(Long userId) {
@@ -115,7 +109,21 @@ public abstract class User {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
+
+	public List<Prediction> getPredictions() {
+		return predictions;
+	}
+
+	public void setPredictions(List<Prediction> predictions) {
+		this.predictions = predictions;
+	}
+
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
+
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
 
 }
