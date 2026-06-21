@@ -1,4 +1,4 @@
-package com.fe.horseracing.repository;
+package com.fe.horseracing.repository.interfaces;
 
 import com.fe.horseracing.pojo.Invitation;
 import com.fe.horseracing.enums.InvitationStatus;

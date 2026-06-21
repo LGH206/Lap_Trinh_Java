@@ -35,34 +35,15 @@ public class Race {
     private List<Invitation> invitations;
     
     @OneToMany(mappedBy = "race")
+    private List<Registration> registrations;
+    
+    @OneToMany(mappedBy = "race")
     private List<Prediction> predictions;
     
+    @OneToMany(mappedBy = "race")
+    private List<Violation> violations;
+    
 	public Race() {
-		super();
-	}
-
-	public RaceReferee getReferee() {
-		return referee;
-	}
-
-	public void setReferee(RaceReferee referee) {
-		this.referee = referee;
-	}
-
-	public List<Invitation> getInvitations() {
-		return invitations;
-	}
-
-	public void setInvitations(List<Invitation> invitations) {
-		this.invitations = invitations;
-	}
-
-	public List<Prediction> getBettings() {
-		return predictions;
-	}
-
-	public void setBettings(List<Prediction> bettings) {
-		this.predictions = bettings;
 	}
 
 	public Long getRaceId() {
@@ -113,6 +94,14 @@ public class Race {
 		this.tournament = tournament;
 	}
 
+	public RaceReferee getReferee() {
+		return referee;
+	}
+
+	public void setReferee(RaceReferee referee) {
+		this.referee = referee;
+	}
+
 	public List<RaceResult> getRaceResults() {
 		return raceResults;
 	}
@@ -120,5 +109,37 @@ public class Race {
 	public void setRaceResults(List<RaceResult> raceResults) {
 		this.raceResults = raceResults;
 	}
-    
+
+	public List<Invitation> getInvitations() {
+		return invitations;
+	}
+
+	public void setInvitations(List<Invitation> invitations) {
+		this.invitations = invitations;
+	}
+
+	public List<Prediction> getPredictions() {
+		return predictions;
+	}
+
+	public void setPredictions(List<Prediction> predictions) {
+		this.predictions = predictions;
+	}
+
+	public List<Registration> getRegistrations() {
+		return registrations;
+	}
+
+	public void setRegistrations(List<Registration> registrations) {
+		this.registrations = registrations;
+	}
+
+	public List<Violation> getViolations() {
+		return violations;
+	}
+
+	public void setViolations(List<Violation> violations) {
+		this.violations = violations;
+	}
+
 }

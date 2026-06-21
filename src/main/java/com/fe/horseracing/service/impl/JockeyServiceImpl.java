@@ -8,12 +8,12 @@ import com.fe.horseracing.pojo.Jockey;
 import com.fe.horseracing.pojo.Race;
 import com.fe.horseracing.pojo.RaceResult;
 import com.fe.horseracing.pojo.Horse;
-import com.fe.horseracing.repository.JockeyRepository;
 import com.fe.horseracing.repository.UserRepository;
+import com.fe.horseracing.repository.interfaces.JockeyRepository;
+import com.fe.horseracing.repository.interfaces.RaceResultRepository;
+import com.fe.horseracing.repository.interfaces.RegistrationRepository;
 import com.fe.horseracing.repository.RaceRepository;
-import com.fe.horseracing.repository.RaceResultRepository;
 import com.fe.horseracing.repository.HorseRepository;
-import com.fe.horseracing.repository.RegistrationRepository;
 import com.fe.horseracing.service.interfaces.IJockeyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 @Transactional
 public class JockeyServiceImpl implements IJockeyService {
 

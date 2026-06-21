@@ -2,6 +2,7 @@ package com.fe.horseracing.pojo;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "jockeys")
@@ -35,6 +36,9 @@ public class Jockey extends User {
     @Column(name = "jockey_status", nullable = false, length = 20)
     private String jockeyStatus; 
 
+    @OneToMany(mappedBy = "jockey")
+    private List<Violation> violations;
+    
     public Jockey() {
         super();
         this.jockeyStatus = "AVAILABLE";
@@ -127,7 +131,15 @@ public class Jockey extends User {
         this.jockeyStatus = jockeyStatus;
     }
 
-    @Transient
+    public List<Violation> getViolations() {
+		return violations;
+	}
+
+	public void setViolations(List<Violation> violations) {
+		this.violations = violations;
+	}
+
+	@Transient
     public double getWinRate() {
         if (totalRaces == 0) {
             return 0.0;

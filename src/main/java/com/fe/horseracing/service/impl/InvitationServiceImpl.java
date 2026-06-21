@@ -9,6 +9,9 @@ import com.fe.horseracing.pojo.Horse;
 import com.fe.horseracing.pojo.User;
 import com.fe.horseracing.enums.InvitationStatus;
 import com.fe.horseracing.repository.*;
+import com.fe.horseracing.repository.interfaces.InvitationRepository;
+import com.fe.horseracing.repository.interfaces.JockeyRepository;
+import com.fe.horseracing.repository.interfaces.RegistrationRepository;
 import com.fe.horseracing.service.interfaces.IInvitationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service
 @Transactional
 public class InvitationServiceImpl implements IInvitationService {
 

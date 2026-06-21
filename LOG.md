@@ -4,7 +4,7 @@
 -cập nhật đầy đủ ngày/tháng - mọi hành động trên git và Pj, kể cả xóa file, hay code
 ```
 
-##UPDATE: 8-/6/26 -- GIA HUY
+##UPDATE: 8-/6/26
 ```text
 Set up maven Pj -- SQL Server
 -- cập nhật folder
@@ -45,7 +45,7 @@ Không triển khai:
 -- tạo pack enums -- mục đích xây dựng các class status
 ```
 
-##UPDATE 14/6 -- GIA HUY
+##UPDATE 14/6
 ```text
 thiết lập 1 số quan hệ liên quan tới race và result
 
@@ -59,4 +59,16 @@ RaceReferee 1\N Race
 
 -- tao enums RaceReferee/ Invitation/ RaceResult/ Betting 
 - refactored stat = enums
+```
+
+
+##UPDATE 20/6
+```text
+✓ RaceResultDAO
+✓ RaceResultRepository
+✓ RaceResultService
+
+✓ PredictionDAO
+✓ PredictionRepository
+✓ PredictionService
 ```

@@ -1,4 +1,4 @@
-package com.fe.horseracing.repository;
+package com.fe.horseracing.repository.interfaces;
 
 import com.fe.horseracing.pojo.Jockey;
 import org.springframework.data.jpa.repository.JpaRepository;
