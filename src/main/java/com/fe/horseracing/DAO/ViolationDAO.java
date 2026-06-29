@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.fe.horseracing.enums.ViolationType;
 import com.fe.horseracing.pojo.Violation;
 
 import jakarta.persistence.EntityManager;
@@ -61,6 +62,19 @@ public class ViolationDAO {
         query.setParameter("horseId", horseId);
         return query.getResultList();
     }
+    
+    public List<Violation> findByJockey(Long jockeyId) {
+
+        TypedQuery<Violation> query = em.createQuery(
+                "SELECT v FROM Violation v " +
+                "WHERE v.jockey.userId = :jockeyId " +
+                "ORDER BY v.createdAt DESC",
+                Violation.class);
+
+        query.setParameter("jockeyId", jockeyId);
+
+        return query.getResultList();
+    }
 
     public List<Violation> findByReferee(Long refereeId) {
         TypedQuery<Violation> query = em.createQuery(
@@ -68,6 +82,19 @@ public class ViolationDAO {
                         "WHERE v.referee.userId = :refereeId",
                         Violation.class);
         query.setParameter("refereeId", refereeId);
+        return query.getResultList();
+    }
+    
+    public List<Violation> findByType(ViolationType violationType) {
+
+        TypedQuery<Violation> query = em.createQuery(
+                "SELECT v FROM Violation v " +
+                "WHERE v.violationType = :type " +
+                "ORDER BY v.createdAt DESC",
+                Violation.class);
+
+        query.setParameter("type", violationType);
+
         return query.getResultList();
     }
 }

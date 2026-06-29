@@ -56,8 +56,21 @@ public class NotificationDAO {
         query.setParameter("userId", userId);
         return query.getResultList();
     }
+    
+    public List<Notification> findReadByUser(Long userId) {
 
-    // FIND UNREAD
+        TypedQuery<Notification> query = em.createQuery(
+                "SELECT n FROM Notification n " +
+                "WHERE n.user.userId = :userId " +
+                "AND n.isRead = true " +
+                "ORDER BY n.createdAt DESC",
+                Notification.class);
+
+        query.setParameter("userId", userId);
+
+        return query.getResultList();
+    }
+
     public List<Notification> findUnreadByUser(Long userId) {
         TypedQuery<Notification> query = em.createQuery(
                         "SELECT n FROM Notification n " +
@@ -70,13 +83,18 @@ public class NotificationDAO {
     }
 
     // MARK AS READ
-    public void markAsRead(Long notificationId) {
+    public Notification markAsRead(Long notificationId) {
+
         Notification notification = em.find(Notification.class, notificationId);
+
         if (notification != null) {
             notification.setIsRead(true);
+            em.merge(notification);
         }
-    }
 
+        return notification;
+    }
+    
     // COUNT UNREAD
     public Long countUnread(Long userId) {
     	TypedQuery<Long> query = em.createQuery(

@@ -154,4 +154,18 @@ public class RaceResultDAO {
         query.setParameter("horseId", horseId);
         return query.getSingleResult();
     }
+
+    public List<RaceResult> findByOwner(Long ownerId) {
+
+        String jpql = """
+            SELECT rr
+            FROM RaceResult rr
+            WHERE rr.horse.owner.userId = :ownerId
+            ORDER BY rr.race.raceDate DESC
+            """;
+
+        return em.createQuery(jpql, RaceResult.class)
+                .setParameter("ownerId", ownerId)
+                .getResultList();
+    }
 }
