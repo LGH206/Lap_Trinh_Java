@@ -3,6 +3,8 @@ package com.fe.horseracing.pojo;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fe.horseracing.enums.TournamentStatus;
+
 import jakarta.persistence.*;
 
 @Entity 
@@ -21,7 +23,9 @@ public class Tournament {
 	
 	private Double prizePool;
 	
-	private String status;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private TournamentStatus status;
 	
 	public List<Race> getRaces() {
 		return races;
@@ -78,11 +82,21 @@ public class Tournament {
 		this.prizePool = prizePool;
 	}
 
-	public String getStatus() {
+	public TournamentStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(TournamentStatus status) {
 		this.status = status;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Tournament [tournamentId="
+	            + tournamentId
+	            + ", tournamentName="
+	            + tournamentName
+	            + ", status="
+	            + status + "]";
 	}
 }

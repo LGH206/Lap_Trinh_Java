@@ -1,24 +1,55 @@
 package com.fe.horseracing.service.interfaces;
 
-import com.fe.horseracing.DAO.JockeyDAO;
-import com.fe.horseracing.DAO.RaceDAO;
-import com.fe.horseracing.DAO.HorseDAO;
-import com.fe.horseracing.DAO.RaceResultDAO;
-import com.fe.horseracing.pojo.Jockey;
 import java.util.List;
 
+import com.fe.horseracing.enums.JockeyStatus;
+import com.fe.horseracing.pojo.Horse;
+import com.fe.horseracing.pojo.Invitation;
+import com.fe.horseracing.pojo.Jockey;
+import com.fe.horseracing.pojo.Race;
+import com.fe.horseracing.pojo.RaceResult;
+
 public interface IJockeyService {
-    Long registerJockey(Jockey jockey, String rawPassword);
-    JockeyDAO getJockeyById(Long jockeyId);
-    JockeyDAO getJockeyByUserId(Long userId);
-    List<JockeyDAO> getAllJockeys();
-    List<JockeyDAO> getAvailableJockeys();
-    boolean updateJockeyProfile(Jockey jockey);
-    boolean blockJockey(Long jockeyId);
-    boolean activateJockey(Long jockeyId);
-    boolean updateJockeyResults(Long jockeyId, boolean winStatus);
-    List<JockeyDAO> getJockeyLeaderboard();
-    List<RaceDAO> getRaceSchedule();
-    List<RaceResultDAO> getPersonalResults(Long jockeyId);
-    HorseDAO getHorseDetails(Long horseId);
+
+    //  CRUD 
+
+    void save(Jockey jockey);
+
+    void update(Jockey jockey);
+
+    void delete(Long jockeyId);
+
+    Jockey findById(Long jockeyId);
+
+    List<Jockey> findAll();
+    
+    String register(Jockey jockey, String confirmPassword);
+
+    //Query
+    Jockey findByLicenseNumber(String licenseNumber);
+
+    List<Jockey> findByStatus(JockeyStatus status);
+
+    List<Jockey> findAvailableJockeys();
+
+    // Business
+
+    List<Invitation> viewInvitations(Long jockeyId);
+
+    void acceptInvitation(Long invitationId);
+
+    void rejectInvitation(Long invitationId);
+
+    List<Race> viewAssignedRaces(Long jockeyId);
+
+    List<Race> viewRaceSchedule(Long jockeyId);
+
+    Horse viewHorse(Long horseId);
+
+    List<RaceResult> viewRaceResults(Long jockeyId);
+
+    List<RaceResult> viewRankings(Long jockeyId);
+
+	void approveJockey(Long jockeyId);
+
 }

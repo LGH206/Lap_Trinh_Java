@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fe.horseracing.enums.JockeyStatus;
+
 @Entity
 @Table(name = "jockeys")
 @PrimaryKeyJoinColumn(name = "user_Id")
@@ -33,30 +35,25 @@ public class Jockey extends User {
     @Column(name = "profile_image_url", length = 255)
     private String profileImageUrl;
 
-    @Column(name = "jockey_status", nullable = false, length = 20)
-    private String jockeyStatus; 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private JockeyStatus jockeyStatus; 
 
     @OneToMany(mappedBy = "jockey")
     private List<Violation> violations;
     
+    @OneToMany(mappedBy = "jockey")
+    private List<Registration> registrations;
+    
     public Jockey() {
         super();
-        this.jockeyStatus = "AVAILABLE";
+        this.jockeyStatus = JockeyStatus.AVAILABLE;
         this.totalRaces = 0;
         this.totalWins = 0;
     }
 
-    public Jockey(String userName, String password, String email, String firstName, String lastName, String phoneNumber, String licenseNumber, String nationality, LocalDate dateOfBirth, double weight, int experienceYears) {
-        super();
-        this.licenseNumber = licenseNumber;
-        this.nationality = nationality;
-        this.dateOfBirth = dateOfBirth;
-        this.weight = weight;
-        this.experienceYears = experienceYears;
-        this.jockeyStatus = "AVAILABLE";
-        this.totalRaces = 0;
-        this.totalWins = 0;
-    }
+    @OneToMany(mappedBy = "jockey")
+    private List<RaceResult> raceResults;
 
     // Getters & Setters
     public String getLicenseNumber() {
@@ -123,15 +120,31 @@ public class Jockey extends User {
         this.profileImageUrl = profileImageUrl;
     }
 
-    public String getJockeyStatus() {
-        return jockeyStatus;
-    }
+    public JockeyStatus getJockeyStatus() {
+		return jockeyStatus;
+	}
 
-    public void setJockeyStatus(String jockeyStatus) {
-        this.jockeyStatus = jockeyStatus;
-    }
+	public void setJockeyStatus(JockeyStatus jockeyStatus) {
+		this.jockeyStatus = jockeyStatus;
+	}
 
-    public List<Violation> getViolations() {
+	public List<Registration> getRegistrations() {
+		return registrations;
+	}
+
+	public void setRegistrations(List<Registration> registrations) {
+		this.registrations = registrations;
+	}
+
+	public List<RaceResult> getRaceResults() {
+		return raceResults;
+	}
+
+	public void setRaceResults(List<RaceResult> raceResults) {
+		this.raceResults = raceResults;
+	}
+
+	public List<Violation> getViolations() {
 		return violations;
 	}
 

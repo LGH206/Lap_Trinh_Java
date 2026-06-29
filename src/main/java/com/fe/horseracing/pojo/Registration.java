@@ -1,7 +1,8 @@
 package com.fe.horseracing.pojo;
 
 import java.time.LocalDate;
-import java.util.List;
+import com.fe.horseracing.enums.RegistrationStatus;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -11,9 +12,16 @@ public class Registration {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long registrationId;
 	
+	@PrePersist
+	public void prePersist() {
+	    registrationDate = LocalDate.now();
+	}
+	
 	private LocalDate registrationDate;
 	
-	private String status;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private RegistrationStatus status;
 	
     @ManyToOne
     private Horse horse;
@@ -44,11 +52,11 @@ public class Registration {
 		this.registrationDate = registrationDate;
 	}
 
-	public String getStatus() {
+	public RegistrationStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(RegistrationStatus status) {
 		this.status = status;
 	}
 
@@ -74,5 +82,13 @@ public class Registration {
 
 	public void setRace(Race race) {
 		this.race = race;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Registration [registrationId="
+	            + registrationId
+	            + ", status="
+	            + status + "]";
 	}
 }

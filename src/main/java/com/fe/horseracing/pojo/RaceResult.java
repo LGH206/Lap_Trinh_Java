@@ -36,6 +36,10 @@ public class RaceResult {
 	@JoinColumn(name = "referee_id")
 	private RaceReferee referee;
 	
+	@ManyToOne
+	@JoinColumn(name = "jockey_id")
+	private Jockey jockey;
+	
 	public ResultStatus getVerificationStatus() {
 		return verificationStatus;
 	}
@@ -116,8 +120,15 @@ public class RaceResult {
 		this.horse = horse;
 	}
 	
+	public Jockey getJockey() {
+		return jockey;
+	}
+
+	public void setJockey(Jockey jockey) {
+		this.jockey = jockey;
+	}
+
 	public RaceResult() {
-		super();
 	}
 
 	public RaceResult(Long resultId, Integer position, Double finishTime, Double score, ResultStatus verificationStatus,
@@ -139,7 +150,4 @@ public class RaceResult {
 		return "RaceResult [resultId=" + resultId + ", position=" + position + ", verificationStatus="
 				+ verificationStatus + "]";
 	}
-	
-
-	
 }

@@ -1,0 +1,102 @@
+<div th:fragment="sidebar">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-horse-head"></i>
+
+            <span>Horse Hub</span>
+
+        </div>
+
+        <div class="menu-title">
+            MAIN
+        </div>
+
+        <nav>
+
+            <a th:href="@{/admin/dashboard}">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+        </nav>
+
+        <div class="menu-title">
+            MANAGEMENT
+        </div>
+
+        <nav>
+
+            <a th:href="@{/admin/users}">
+                <i class="fa-solid fa-users"></i>
+                Users
+            </a>
+            
+            <a th:href="@{/admin/owners}">
+			    <i class="fa-solid fa-user"></i>
+			    Horse Owners
+			</a>
+
+            <a th:href="@{/admin/horses}">
+                <i class="fa-solid fa-horse"></i>
+                Horses
+            </a>
+
+            <a th:href="@{/admin/jockeys}">
+                <i class="fa-solid fa-user"></i>
+                Jockeys
+            </a>
+
+            <a th:href="@{/admin/referees}">
+                <i class="fa-solid fa-gavel"></i>
+                Referees
+            </a>
+
+        </nav>
+
+        <div class="menu-title">
+            RACING
+        </div>
+
+        <nav>
+
+            <a th:href="@{/admin/tournaments}">
+                <i class="fa-solid fa-trophy"></i>
+                Tournament
+            </a>
+
+            <a th:href="@{/admin/races}">
+                <i class="fa-solid fa-flag-checkered"></i>
+                Races
+            </a>
+
+            <a th:href="@{/admin/results}">
+                <i class="fa-solid fa-ranking-star"></i>
+                Results
+            </a>
+
+            <a th:href="@{/admin/predictions}">
+                <i class="fa-solid fa-chart-line"></i>
+                Predictions
+            </a>
+
+        </nav>
+
+        <div class="menu-title">
+            SYSTEM
+        </div>
+
+        <nav>
+
+            <a th:href="@{/logout}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+</div>

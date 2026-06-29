@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('User Detail','admin.css')}"></head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <aside th:replace="~{admin/fragments/sidebar :: sidebar}"></aside>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Topbar -->
+        <header th:replace="~{admin/fragments/topbar :: topbar}"></header>
+
+        <!-- Content -->
+        <main class="main-content">
+
+            <!-- Page Header -->
+            <div class="page-header">
+
+                <div>
+
+                    <h2>User Information</h2>
+
+                    <p class="text-muted">
+                        View account information.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="card form-card">
+
+                <div class="card-body">
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                User ID
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.userId}"
+                                    readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Username
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.userName}"
+                                    readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                First Name
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.firstName}"
+                                    readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Last Name
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.lastName}"
+                                    readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Email
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.email}"
+                                    readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Phone Number
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.phoneNumber}"
+                                    readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Role
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.role}"
+                                    readonly>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label class="form-label">
+                                Status
+                            </label>
+
+                            <input
+                                    class="form-control"
+                                    th:value="${user.active ? 'Active' : 'Locked'}"
+                                    readonly>
+
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="form-footer">
+
+                        <a th:href="@{/admin/users}"
+                           class="btn btn-secondary">
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Back
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+</body>
+
+</html>
+

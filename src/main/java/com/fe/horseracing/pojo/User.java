@@ -2,6 +2,8 @@ package com.fe.horseracing.pojo;
 
 import java.util.List;
 
+import com.fe.horseracing.enums.Role;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -31,7 +33,14 @@ public abstract class User {
 	@Column(nullable = false)
 	private String password;
 	
+	@Column(nullable = false)
+	private Boolean active = true;
+	
 	private String phoneNumber;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Role role;
 	
 	@OneToMany(mappedBy = "spectator")
 	private List<Prediction> predictions;
@@ -40,18 +49,6 @@ public abstract class User {
 	private List<Notification> notifications;
 	
 	public User() {
-	}
-
-	public User(Long userId, String firstName, String lastName, String email, String userName, String password,
-			String phoneNumber, List<Prediction> predictions) {
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.userName = userName;
-		this.password = password;
-		this.phoneNumber = phoneNumber;
-		this.predictions = predictions;
 	}
 
 	public Long getUserId() {
@@ -126,4 +123,27 @@ public abstract class User {
 		this.notifications = notifications;
 	}
 
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	@Override
+	public String toString() {
+	    return "User [userId=" + userId
+	            + ", userName=" + userName
+	            + ", email=" + email
+	            + ", role=" + role + "]";
+	}
 }

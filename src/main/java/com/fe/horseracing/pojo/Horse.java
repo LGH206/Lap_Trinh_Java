@@ -1,6 +1,9 @@
 package com.fe.horseracing.pojo;
 
 import java.util.List;
+
+import com.fe.horseracing.enums.HorseStatus;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -25,7 +28,10 @@ public class Horse {
 
 	private String color;
 
-	private String status;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private HorseStatus status;
+	
 	@Column(nullable = false)
 	private Boolean verified = false; 
 
@@ -34,6 +40,10 @@ public class Horse {
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private HorseOwner owner;
+	
+	@ManyToOne
+	@JoinColumn(name = "jockey_id")
+	private Jockey jockey;
 
 	@OneToMany(mappedBy = "predictedHorse")
 	private List<Prediction> predictions;
@@ -61,14 +71,6 @@ public class Horse {
 
 	public void setMedicalCertificate(String medicalCertificate) {
 		this.medicalCertificate = medicalCertificate;
-	}
-
-	public List<Prediction> getBettings() {
-		return predictions;
-	}
-
-	public void setBettings(List<Prediction> bettings) {
-		this.predictions = bettings;
 	}
 
 	public String getColor() {
@@ -127,14 +129,12 @@ public class Horse {
 		this.weight = weight;
 	}
 
-	public String getStatus() {
+	public HorseStatus getStatus() {
 		return status;
 	}
-
-	public void setStatus(String status) {
+	public void setStatus(HorseStatus status) {
 		this.status = status;
 	}
-
 	public HorseOwner getOwner() {
 		return owner;
 	}
@@ -161,5 +161,19 @@ public class Horse {
 	}
 	public void setViolations(List<Violation> violations) {
 		this.violations = violations;
+	}
+	
+	public Jockey getJockey() {
+		return jockey;
+	}
+	public void setJockey(Jockey jockey) {
+		this.jockey = jockey;
+	}
+	@Override
+	public String toString() {
+	    return "Horse [horseId=" + horseId
+	            + ", horseName=" + horseName
+	            + ", breed=" + breed
+	            + ", status=" + status + "]";
 	}
 }

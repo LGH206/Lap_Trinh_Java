@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fe.horseracing.enums.RaceStatus;
+
 @Entity
 @Table(name = "races")
 public class Race {
@@ -18,7 +20,9 @@ public class Race {
 
     private String location;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RaceStatus status;
 
     @ManyToOne
     @JoinColumn(name = "tournament_id")
@@ -43,6 +47,9 @@ public class Race {
     @OneToMany(mappedBy = "race")
     private List<Violation> violations;
     
+    @OneToMany(mappedBy = "race")
+    private List<RaceReport> reports;
+
 	public Race() {
 	}
 
@@ -78,11 +85,11 @@ public class Race {
 		this.location = location;
 	}
 
-	public String getStatus() {
+	public RaceStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(RaceStatus status) {
 		this.status = status;
 	}
 
@@ -141,5 +148,22 @@ public class Race {
 	public void setViolations(List<Violation> violations) {
 		this.violations = violations;
 	}
+	
+	public List<RaceReport> getReports() {
+		return reports;
+	}
 
+	public void setReports(List<RaceReport> reports) {
+		this.reports = reports;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Race [raceId="
+	            + raceId
+	            + ", raceName="
+	            + raceName
+	            + ", status="
+	            + status + "]";
+	}
 }

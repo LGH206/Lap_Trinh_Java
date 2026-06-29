@@ -2,6 +2,8 @@ package com.fe.horseracing.pojo;
 
 import java.time.LocalDateTime;
 import com.fe.horseracing.enums.InvitationStatus;
+import com.fe.horseracing.enums.InvitationType;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -21,17 +23,22 @@ public class Invitation {
 
     private String message;
 
+    private String title;
+    
+    @Enumerated(EnumType.STRING)
+    private InvitationType invitationType;
+    
     @ManyToOne
     @JoinColumn(name = "race_id")
     private Race race;
 
     @ManyToOne
-    @JoinColumn(name = "referee_id")
-    private User referee;
+    @JoinColumn(name = "sender_id")
+    private User sender;
 
     @ManyToOne
-    @JoinColumn(name = "jockey_id")
-    private Jockey jockey;
+    @JoinColumn(name = "receiver_id")
+    private User receiver;
 
     @ManyToOne
     @JoinColumn(name = "registration_id")
@@ -45,6 +52,9 @@ public class Invitation {
         return expiresAt;
     }
 
+	public Invitation() {
+	}
+	
     public void setExpiresAt(LocalDateTime expiresAt) {
         this.expiresAt = expiresAt;
     }
@@ -102,22 +112,6 @@ public class Invitation {
 		this.race = race;
 	}
 
-	public User getReferee() {
-		return referee;
-	}
-
-	public void setReferee(User referee) {
-		this.referee = referee;
-	}
-
-	public Jockey getJockey() {
-		return jockey;
-	}
-
-	public void setJockey(Jockey jockey) {
-		this.jockey = jockey;
-	}
-
 	public Registration getRegistration() {
 		return registration;
 	}
@@ -133,20 +127,37 @@ public class Invitation {
 	public void setResponseMessage(String responseMessage) {
 		this.responseMessage = responseMessage;
 	}
-	
-	public Invitation() {
+
+	public User getSender() {
+		return sender;
 	}
 
-	public Invitation(Long invitationId, LocalDateTime sentDate, LocalDateTime responseDate, InvitationStatus status,
-			String message, Race race, User referee) {
-		super();
-		this.invitationId = invitationId;
-		this.sentDate = sentDate;
-		this.responseDate = responseDate;
-		this.status = status;
-		this.message = message;
-		this.race = race;
-		this.referee = referee;
+	public void setSender(User sender) {
+		this.sender = sender;
+	}
+
+	public User getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(User receiver) {
+		this.receiver = receiver;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public InvitationType getInvitationType() {
+		return invitationType;
+	}
+
+	public void setInvitationType(InvitationType invitationType) {
+		this.invitationType = invitationType;
 	}
 
 	@Override

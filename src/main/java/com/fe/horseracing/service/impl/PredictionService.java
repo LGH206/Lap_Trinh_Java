@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.fe.horseracing.enums.PredictionStatus;
 import com.fe.horseracing.pojo.Prediction;
 import com.fe.horseracing.repository.interfaces.IPredictionRepository;
+import com.fe.horseracing.repository.interfaces.IRaceResultRepository;
 import com.fe.horseracing.service.interfaces.INotificationService;
 import com.fe.horseracing.service.interfaces.IPredictionService;
 import com.fe.horseracing.pojo.RaceResult;
@@ -14,17 +15,17 @@ import com.fe.horseracing.service.interfaces.IRaceResultService;
 @Service
 public class PredictionService implements IPredictionService {
 	private IPredictionRepository predictionRepo;
-	private IRaceResultService raceResultService;
+	private IRaceResultRepository raceResultRepo;
 	private INotificationService notificationService;
 
     @Autowired
     public PredictionService(
     		IPredictionRepository predictionRepo,
-    		IRaceResultService raceResultService,
+    		IRaceResultRepository  raceResultRepo,
     		INotificationService notificationService) 
     {
         this.predictionRepo = predictionRepo;
-        this.raceResultService = raceResultService;
+        this.raceResultRepo  = raceResultRepo;
         this.notificationService = notificationService;
     }
 
@@ -76,7 +77,7 @@ public class PredictionService implements IPredictionService {
 	@Override
 	public void processPredictions(Long raceId) {
 		// TODO Auto-generated method stub
-	    RaceResult winner = raceResultService.getWinner(raceId);
+	    RaceResult winner = raceResultRepo.getWinner(raceId);
 	    if (winner == null) {
 	        return;
 	    }
@@ -90,18 +91,25 @@ public class PredictionService implements IPredictionService {
 	                          .getHorseId())) {
 
 	            prediction.setStatus( PredictionStatus.CORRECT);
-	            notificationService.createNotification(
+	            notificationService.sendNotification(
 	                    prediction.getSpectator(),
 	                    "Prediction Result",
 	                    "Congratulations! Your prediction was correct.");
 	        } 
 	        else {
 	            prediction.setStatus( PredictionStatus.INCORRECT);
-	            notificationService.createNotification(
+	            notificationService.sendNotification(
 	                    prediction.getSpectator(),
 	                    "Prediction Result",
 	                    "Your prediction was incorrect.");}
 	        predictionRepo.update(prediction);
 	    }
+	}
+
+	@Override
+	public void submitPrediction(Prediction prediction) {
+		// TODO Auto-generated method stub
+	    prediction.setStatus(PredictionStatus.PENDING);
+	    save(prediction);
 	}
 }

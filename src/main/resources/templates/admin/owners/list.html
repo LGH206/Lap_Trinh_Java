@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Horse Owners','admin.css')}"></head>
+
+<body>
+
+<div class="wrapper">
+
+    <aside th:replace="~{admin/fragments/sidebar :: sidebar}"></aside>
+
+    <div class="main">
+
+        <header th:replace="~{admin/fragments/topbar :: topbar}"></header>
+
+        <main class="main-content">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h2>Horse Owners</h2>
+
+                <a class="btn btn-primary"
+                   th:href="@{/admin/owners/add}">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Add Owner
+
+                </a>
+
+            </div>
+
+            <div class="card shadow-sm">
+
+                <div class="card-body">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Status</th>
+                            <th width="170">Action</th>
+
+                        </tr>
+                        </thead>
+						<tbody>
+						
+						<tr th:each="owner : ${owners}">
+						
+						    <td th:text="${owner.userId}"></td>
+						
+						    <td>
+						        <span th:text="${owner.firstName}"></span>
+						        <span th:text="${owner.lastName}"></span>
+						    </td>
+						
+						    <td th:text="${owner.email}"></td>
+						
+						    <td th:text="${owner.phoneNumber}"></td>
+						
+						    <td>
+
+							    <span class="badge bg-success"
+							          th:if="${owner.active}">
+							        Active
+							    </span>
+							
+							    <span class="badge bg-danger"
+							          th:unless="${owner.active}">
+							        Locked
+							    </span>
+							
+							</td>
+						
+						    <td>
+						
+						        <a class="btn btn-warning btn-sm"
+						           th:href="@{/admin/owners/edit/{id}(id=${owner.userId})}">
+						
+						            <i class="fa-solid fa-pen"></i>
+						
+						        </a>
+						
+							    <!-- Lock -->
+							    <a class="btn btn-danger btn-sm"
+							       th:if="${owner.active}"
+							       th:href="@{/admin/owners/lock/{id}(id=${owner.userId})}"
+							       onclick="return confirm('Lock this owner?')"
+							       title="Lock">
+							
+							        <i class="fa-solid fa-lock"></i>
+							
+							    </a>
+							
+							    <!-- Unlock -->
+							    <a class="btn btn-success btn-sm"
+							       th:unless="${owner.active}"
+							       th:href="@{/admin/owners/unlock/{id}(id=${owner.userId})}"
+							       onclick="return confirm('Unlock this owner?')"
+							       title="Unlock">
+							
+							        <i class="fa-solid fa-lock-open"></i>
+							
+							    </a>
+						
+						    </td>
+													
+						</tr>
+						
+						<tr th:if="${#lists.isEmpty(owners)}">
+						
+						    <td colspan="6" class="text-center text-muted">
+						
+						        No horse owners found.
+						
+						    </td>
+						
+						</tr>
+						
+						</tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+</body>
+
+</html>

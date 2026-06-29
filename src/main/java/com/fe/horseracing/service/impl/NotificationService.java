@@ -14,9 +14,7 @@ public class NotificationService implements INotificationService {
     private INotificationRepository notificationRepo;
 
     @Autowired
-    public NotificationService(
-            INotificationRepository notificationRepo) {
-
+    public NotificationService(INotificationRepository notificationRepo) {
         this.notificationRepo = notificationRepo;
     }
     
@@ -63,27 +61,52 @@ public class NotificationService implements INotificationService {
 	}
 
 	@Override
-	public void markAsRead(Long notificationId) {
-		// TODO Auto-generated method stub
-		notificationRepo.markAsRead(notificationId);
-	}
-
-	@Override
 	public Long countUnread(Long userId) {
 		// TODO Auto-generated method stub
 		return notificationRepo.countUnread(userId);
 	}
 
 	@Override
-	public void createNotification(User user, String title, String message) {
+	public List<Notification> findReadByUser(Long userId) {
 		// TODO Auto-generated method stub
-    Notification notification = new Notification();
-    notification.setUser(user);
-    notification.setTitle(title);
-    notification.setMessage(message);
-    notification.setCreatedAt(LocalDateTime.now());
-    notification.setIsRead(false);
-    notificationRepo.save(notification);
+		return notificationRepo.findReadByUser(userId);
 	}
 
+    @Override
+    public Notification markAsRead(Long notificationId) {
+        Notification notification = findById(notificationId);
+
+        if (notification == null)
+            return null;
+
+        notification.setIsRead(true);
+        update(notification);
+        return notification;
+    }
+    @Override
+    public void markAllAsRead(Long userId) {
+
+        List<Notification> notifications = findUnreadByUser(userId);
+
+        for (Notification notification : notifications) {
+            markAsRead(notification.getNotificationId());
+        }
+    }
+
+	@Override
+	public void sendNotification(User user, String title, String message) {
+		// TODO Auto-generated method stub
+	    if (user == null)
+	        return;
+
+	    Notification notification = new Notification();
+
+	    notification.setUser(user);
+	    notification.setTitle(title);
+	    notification.setMessage(message);
+	    notification.setCreatedAt(LocalDateTime.now());
+	    notification.setIsRead(false);
+
+	    save(notification);
+	}
 }

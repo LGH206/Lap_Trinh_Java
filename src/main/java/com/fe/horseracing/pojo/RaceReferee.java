@@ -27,30 +27,10 @@ public class RaceReferee extends User {
 	private List<Race> races;
 	
 	@OneToMany(mappedBy = "referee")
-	private List<Invitation> invitations;
-	
-	@OneToMany(mappedBy = "referee")
-	private List<RaceResult> raceResults;
-	
-	@OneToMany(mappedBy = "referee")
 	private List<Violation> violations;
 	
-	
-	public List<Invitation> getInvitations() {
-		return invitations;
-	}
-
-	public void setInvitations(List<Invitation> invitations) {
-		this.invitations = invitations;
-	}
-
-	public List<RaceResult> getRaceResults() {
-		return raceResults;
-	}
-
-	public void setRaceResults(List<RaceResult> raceResults) {
-		this.raceResults = raceResults;
-	}
+	@OneToMany(mappedBy = "referee")
+	private List<RaceReport> reports;
 
 	public List<Race> getRaces() {
 		return races;
@@ -99,6 +79,14 @@ public class RaceReferee extends User {
 
 	public void setViolations(List<Violation> violations) {
 		this.violations = violations;
+	}
+
+	public List<RaceReport> getReports() {
+		return reports;
+	}
+
+	public void setReports(List<RaceReport> reports) {
+		this.reports = reports;
 	}
 
 	@Override

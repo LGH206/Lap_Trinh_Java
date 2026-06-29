@@ -21,7 +21,17 @@ public interface IRaceResultService {
 
     List<RaceResult> findVerifiedResults();
     
+    List<RaceResult> findByJockey(Long jockeyId);
+
+    List<RaceResult> getRankingsByJockey(Long jockeyId);
+
+    List<RaceResult> getRankingsByHorse(Long horseId);
+    
     List<RaceResult> findByHorse(Long horseId);
+    
+    List<RaceResult> findByOwner(Long ownerId);
+    
+    List<RaceResult> getRankingsByOwner(Long ownerId);
 
     List<RaceResult> findByStatus(ResultStatus status);
 
@@ -34,4 +44,10 @@ public interface IRaceResultService {
     Long countWinsByHorse(Long horseId);
 
     Long countRacesByHorse(Long horseId);
+    
+    void verifyRaceResult(Long resultId);
+    
+    void rejectRaceResult(Long resultId);
+
+	void publishRaceResult(Long raceId);	
 }

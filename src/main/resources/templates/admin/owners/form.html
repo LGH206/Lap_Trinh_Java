@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Add Horse Owner','admin.css')}"></head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <aside th:replace="~{admin/fragments/sidebar :: sidebar}"></aside>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Topbar -->
+        <header th:replace="~{admin/fragments/topbar :: topbar}"></header>
+
+        <!-- Content -->
+        <main class="main-content">
+
+            <!-- Page Header -->
+            <div class="page-header">
+
+                <div>
+                    <h2 th:text="${owner.userId == null ?
+					        'Add Horse Owner'
+					        : 'Edit Horse Owner'}">
+					</h2>
+
+					<p class="text-muted"
+					   th:text="${owner.userId == null ?
+					   'Create a new horse owner account.'
+					   : 'Update horse owner information.'}">
+					</p>
+                </div>
+
+            </div>
+            
+			<div class="alert alert-danger"
+			     th:if="${error}"
+			     th:text="${error}">
+			</div>
+			
+            <!-- Form -->
+				<form th:action="@{/admin/owners/save}"
+				      th:object="${owner}"
+				      method="post">
+				<input type="hidden" th:field="*{userId}">
+				    <div class="row g-3">
+				
+				        <!-- First Name -->
+				        <div class="col-md-6">
+				            <label class="form-label">First Name</label>
+				
+				            <input
+				                    type="text" class="form-control"
+				                    th:field="*{firstName}" required>
+				        </div>
+				
+				        <!-- Last Name -->
+				        <div class="col-md-6">
+				
+				            <label class="form-label">Last Name</label>
+				
+				            <input
+				                    type="text" class="form-control"
+				                    th:field="*{lastName}" required>
+				        </div>
+				
+				        <!-- Username -->
+				        <div class="col-md-6">
+				            <label class="form-label">Username</label>
+				
+				            <input
+				                    type="text" class="form-control"
+				                    th:field="*{userName}" required>
+				        </div>
+				
+				        <!-- Email -->
+				        <div class="col-md-6">
+				            <label class="form-label">Email</label>
+				
+				            <input
+				                    type="email" class="form-control"
+				                    th:field="*{email}" required>			
+				        </div>
+				
+				        <!-- Phone -->
+				        <div class="col-md-6">			
+				            <label class="form-label">Phone Number</label>
+				
+				            <input
+				                    type="text" class="form-control"
+				                    th:field="*{phoneNumber}">
+				        </div>
+				
+				        <!-- Password -->
+				        <div class="col-md-6"
+				        	th:if="${owner.userId == null}">>
+				            <label class="form-label">Password</label>
+				
+				            <input
+				                    type="password" class="form-control"
+				                    th:field="*{password}" required>
+				        </div>
+				
+				        <!-- Confirm Password -->
+				        <div class="col-md-6"
+				        	th:if="${owner.userId == null}">>			
+				            <label class="form-label">Confirm Password</label>
+				
+				            <input
+				                    type="password" class="form-control"
+				                    name="confirmPassword" required>
+				        </div>	
+				    </div>
+				    <hr>
+				
+				    <div class="form-footer">
+				
+				        <button
+				                type="submit"
+				                class="btn btn-primary">
+				
+				            <i class="fa-solid fa-floppy-disk"></i>
+				
+				            Save
+				
+				        </button>
+				
+				        <a th:href="@{/admin/owners}" class="btn btn-secondary">
+				            <i class="fa-solid fa-arrow-left"></i>
+				
+				            Cancel
+				
+				        </a>
+				
+				    </div>
+				
+				</form>
+             
+        </main>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+</body>
+
+</html>

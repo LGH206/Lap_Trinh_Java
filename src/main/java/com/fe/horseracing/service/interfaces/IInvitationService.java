@@ -1,14 +1,46 @@
 package com.fe.horseracing.service.interfaces;
 
-import com.fe.horseracing.DAO.InvitationDAO;
 import java.util.List;
 
+import com.fe.horseracing.enums.InvitationStatus;
+import com.fe.horseracing.pojo.Invitation;
+
 public interface IInvitationService {
-    Long sendInvitation(Long registrationId, Long jockeyId, String message, int daysValid);
-    boolean acceptInvitation(Long invitationId, Long jockeyId, String responseMessage);
-    boolean declineInvitation(Long invitationId, Long jockeyId, String responseMessage);
-    boolean cancelInvitation(Long invitationId, Long ownerId);
-    InvitationDAO getInvitationById(Long invitationId);
-    List<InvitationDAO> getPendingInvitations(Long jockeyId);
-    List<InvitationDAO> getSentInvitations(Long ownerId);
+    // CREATE
+    void save(Invitation invitation);
+
+    // UPDATE
+    void update(Invitation invitation);
+
+    // DELETE
+    void delete(Long invitationId);
+
+    // READ
+    Invitation findById(Long invitationId);
+
+    List<Invitation> findAll();
+
+    // QUERY
+    List<Invitation> findBySender(Long senderId);
+
+    List<Invitation> findByReceiver(Long receiverId);
+
+    List<Invitation> findByRace(Long raceId);
+
+    List<Invitation> findByRegistration(Long registrationId);
+
+    List<Invitation> findByStatus(InvitationStatus status);
+
+    // BUSINESS
+    void sendInvitation(Invitation invitation);
+
+    void acceptInvitation(Long invitationId);
+
+    void rejectInvitation(Long invitationId);
+
+    void cancelInvitation(Long invitationId);
+
+    void expireInvitations();
+    
+    boolean hasPendingInvitation( Long senderId, Long receiverId, Long raceId);
 }

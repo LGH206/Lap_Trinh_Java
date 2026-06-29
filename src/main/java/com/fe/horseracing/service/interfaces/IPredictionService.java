@@ -26,4 +26,6 @@ public interface IPredictionService {
     
     //core
     void processPredictions(Long raceId);
+    
+    void submitPrediction(Prediction prediction);
 }

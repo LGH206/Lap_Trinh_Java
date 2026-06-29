@@ -20,9 +20,14 @@ public interface INotificationService {
 
     List<Notification> findUnreadByUser(Long userId);
 
-    void markAsRead(Long notificationId);
+    List<Notification> findReadByUser(Long userId);
 
     Long countUnread(Long userId);
+    
+    void sendNotification(User user, String title, String message);
 
-    void createNotification(User user, String title, String message);
+    Notification markAsRead(Long notificationId);
+
+    void markAllAsRead(Long userId);
+
 }

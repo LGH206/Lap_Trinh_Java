@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Users','admin.css')}"></head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- Sidebar -->
+    <aside th:replace="~{admin/fragments/sidebar :: sidebar}"></aside>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Topbar -->
+        <header th:replace="~{admin/fragments/topbar :: topbar}"></header>
+
+        <!-- Content -->
+        <main class="main-content">
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>User Management</h2>
+
+                    <p class="text-muted">
+                        View and manage all system accounts.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="card form-card">
+
+                <div class="card-body">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Username</th>
+
+                            <th>Email</th>
+
+                            <th>Role</th>
+
+                            <th>Status</th>
+
+                            <th width="220">Action</th>
+
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                        <tr th:each="user : ${users}">
+
+                            <td th:text="${user.userId}"></td>
+
+                            <td th:text="${user.userName}"></td>
+
+                            <td th:text="${user.email}"></td>
+
+                            <td th:text="${user.role}"></td>
+
+                            <td>
+
+                                <span class="badge bg-success"
+                                      th:if="${user.active}">
+                                    Active
+                                </span>
+
+                                <span class="badge bg-danger"
+                                      th:unless="${user.active}">
+                                    Locked
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <!-- View -->
+
+                                <a class="btn btn-info btn-sm"
+                                   th:href="@{/admin/users/view/{id}(id=${user.userId})}"
+                                   title="View">
+
+                                    <i class="fa-solid fa-eye"></i>
+
+                                </a>
+
+                                <!-- Lock -->
+
+                                <a class="btn btn-warning btn-sm"
+                                   th:if="${user.active}"
+                                   th:href="@{/admin/users/lock/{id}(id=${user.userId})}"
+                                   onclick="return confirm('Lock this account?')"
+                                   title="Lock">
+
+                                    <i class="fa-solid fa-lock"></i>
+
+                                </a>
+
+                                <!-- Unlock -->
+
+                                <a class="btn btn-success btn-sm"
+                                   th:unless="${user.active}"
+                                   th:href="@{/admin/users/unlock/{id}(id=${user.userId})}"
+                                   onclick="return confirm('Unlock this account?')"
+                                   title="Unlock">
+
+                                    <i class="fa-solid fa-lock-open"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(users)}">
+
+                            <td colspan="6"
+                                class="text-center text-muted py-4">
+
+                                No users found.
+
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/scripts :: scripts}"></div>
+
+</body>
+
+</html>
