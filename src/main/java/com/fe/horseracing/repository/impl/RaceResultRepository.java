@@ -104,4 +104,22 @@ public class RaceResultRepository implements IRaceResultRepository{
 		return raceResultDAO.countRacesByHorse(horseId);
 	}
 
+	@Override
+	public List<RaceResult> findByJockey(Long jockeyId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RaceResult> findByOwner(Long ownerId) {
+		// TODO Auto-generated method stub
+		return raceResultDAO.findByOwner(ownerId);
+	}
+
+	@Override
+	public List<RaceResult> getRankingsByOwner(Long ownerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

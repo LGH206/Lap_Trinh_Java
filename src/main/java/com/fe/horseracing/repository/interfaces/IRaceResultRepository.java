@@ -22,7 +22,9 @@ public interface IRaceResultRepository {
     List<RaceResult> findVerifiedResults();
     
     List<RaceResult> findByHorse(Long horseId);
-
+    
+    List<RaceResult> findByJockey(Long jockeyId);
+    
     List<RaceResult> findByStatus(ResultStatus status);
 
     List<RaceResult> getRaceRanking(Long raceId);
@@ -34,4 +36,10 @@ public interface IRaceResultRepository {
     Long countWinsByHorse(Long horseId);
 
     Long countRacesByHorse(Long horseId);
+
+	List<RaceResult> findByOwner(Long ownerId);
+
+	List<RaceResult> getRankingsByOwner(Long ownerId);
+
+	
 }

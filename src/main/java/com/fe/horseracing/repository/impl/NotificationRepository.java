@@ -57,16 +57,21 @@ public class NotificationRepository implements INotificationRepository  {
 		return notificationDAO.findUnreadByUser(userId);
 	}
 
-	@Override
-	public void markAsRead(Long notificationId) {
-		// TODO Auto-generated method stub
-		notificationDAO.markAsRead(notificationId);
-	}
+    @Override
+    public Notification markAsRead(Long notificationId) {
+        return notificationDAO.markAsRead(notificationId);
+    }
 
 	@Override
 	public Long countUnread(Long userId) {
 		// TODO Auto-generated method stub
 		return notificationDAO.countUnread(userId);
+	}
+
+	@Override
+	public List<Notification> findReadByUser(Long userId) {
+		// TODO Auto-generated method stub
+		return notificationDAO.findReadByUser(userId);
 	}
 
 }
